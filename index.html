@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYROICE - Sweet Refreshment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B9D;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2D3436;
+            --light: #FFF5F7;
+            --cream: #FFF9F0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            -webkit-text-fill-color: initial;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FFF5F7 0%, #FFE4EC 50%, #E8F8F5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,107,157,0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(78,205,196,0.15) 0%, transparent 70%);
+            bottom: -100px;
+            left: -100px;
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .brand-name {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .tagline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .tagline span {
+            display: inline-block;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, #FF8FAB 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255,107,157,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,107,157,0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 2rem;
+            background: white;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            position: relative;
+            display: block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            box-shadow: 0 20px 60px rgba(255,107,157,0.2);
+            animation: float 6s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, var(--light) 0%, white 100%);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            z-index: 2;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+
+        .menu-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .menu-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .menu-card:hover .menu-image {
+            transform: scale(1.05);
+        }
+
+        .menu-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .menu-content h3 {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .menu-price {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-content p {
+            color: #777;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .order-badge {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #FF8FAB 100%);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .menu-card:hover .order-badge {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255,107,157,0.3);
+        }
+
+        /* Reviews Section */
+        .reviews {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .review-card {
+            background: linear-gradient(135deg, #FFF9F0 0%, #FFF5F7 100%);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .review-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .review-content {
+            padding: 1.5rem;
+        }
+
+        .review-stars {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .review-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .review-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .review-date {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        /* Order CTA Section */
+        .order-cta {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--light) 0%, #FFE4EC 50%, #E8F8F5 100%);
+            text-align: center;
+        }
+
+        .order-cta .section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .order-cta p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .order-cta .btn-primary {
+            font-size: 1.2rem;
+            padding: 1.2rem 3rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #aaa;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 300px;
+                order: -1;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <span class="logo-icon"><img src="logo no bg.png" width="50" height="50" alt="logo-icon"></span>
+            KYROICE
+        </a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="brand-name">KYROICE</h1>
+            <p class="tagline">Welcome to a world of sweet refreshment <span>🍦</span></p>
+            <div class="hero-cta">
+                <a href="https://forms.gle/J9QuXw8YpjhMXdHS6" target="_blank" class="btn btn-primary">Order Now</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title fade-in">All About KYRO</h2>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <p>Kyroice has been serving irresistible ice cream in Malaysia since 2026, with the mission of bringing smiles with every bite. We're here to deliver premium, comforting flavors for everyone to enjoy.</p>
+                    <p>Treat yourself to a refreshing taste of Malaysia today!</p>
+                    <div class="cta-buttons">
+                        <a href="https://forms.gle/J9QuXw8YpjhMXdHS6" target="_blank" class="btn btn-primary">Order Now</a>
+                        <a href="#reviews" class="btn btn-secondary">See Reviews</a>
+                    </div>
+                </div>
+                <div class="about-image fade-in">
+                    <img src="logo no bg.png" alt="KYROICE Ice Cream Sundae">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2 class="section-title fade-in">Our Menu</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;" class="fade-in">6 delicious flavors crafted with love. All items at RM 1.00! Click any item to order.</p>
+            <div class="menu-grid">
+                <a href="https://forms.gle/J9QuXw8YpjhMXdHS6" target="_blank" class="menu-card fade-in">
+                    <img src="rainbow jelly.jpeg" alt="Rainbow Jelly" class="menu-image">
+                    <div class="menu-content">
+                        <h3>Rainbow Jelly</h3>
+                        <div class="menu-price">RM 1.00</div>
+                        <p>A colorful burst of flavors with chewy jelly bits that dance on your tongue</p>
+                        <span class="order-badge">Order Now 🛒</span>
+                    </div>
+                </a>
+                <a href="https://forms.gle/J9QuXw8YpjhMXdHS6" target="_blank" class="menu-card fade-in">
+                    <img src="oriooo.jpg" alt="Moreo Cookies & Cream" class="menu-image">
+                    <div class="menu-content">
+                        <h3>Moreo</h3>
+                        <div class="menu-price">RM 1.00</div>
+                        <p>Creamy cookies and cream perfection with real cookie chunks in every scoop</p>
+                        <span class="order-badge">Order Now 🛒</span>
+                    </div>
+                </a>
+                <a href="https://forms.gle/J9QuXw8YpjhMXdHS6" target="_blank" class="menu-card fade-in">
+                    <img src="coklat.webp" alt="Flavachoko Chocolate" class="menu-image">
+                    <div class="menu-content">
+                        <h3>Flavachoko</h3>
+                        <div class="menu-price">RM 1.00</div>
+                        <p>Rich chocolate indulgence in every scoop — a chocolate lover's dream come true</p>
+                        <span class="order-badge">Order Now 🛒</span>
+                    </div>
+                </a>
+                <a href="https://forms.gle/J9QuXw8YpjhMXdHS6" target="_blank" class="menu-card fade-in">
+                    <img src="chokichoki.jpeg" alt="Sundae Delight" class="menu-image">
+                    <div class="menu-content">
+                        <h3>ChokiKo</h3>
+                        <div class="menu-price">RM 1.00</div>
+                        <p>Smooth and creamy rich chocolate with a hint of Choki-Choki essence.</p>
+                        <span class="order-badge">Order Now 🛒</span>
+                    </div>
+                </a>
+                <a href="https://forms.gle/J9QuXw8YpjhMXdHS6" target="_blank" class="menu-card fade-in">
+                    <img src="aiskrim-malaysia-sirap-rambutan-resipi-foto-utama.webp" alt="Creamy Vanilla Cup" class="menu-image">
+                    <div class="menu-content">
+                        <h3>Rambutan Delight</h3>
+                        <div class="menu-price">RM 1.00</div>
+                        <p>A creamy ice cream made with the sweet, tropical taste of fresh rambutan</p>
+                        <span class="order-badge">Order Now 🛒</span>
+                    </div>
+                </a>
+                <a href="https://forms.gle/J9QuXw8YpjhMXdHS6" target="_blank" class="menu-card fade-in">
+                    <img src="aiskrim-malaysia-creamy-corn-resipi-foto-utama.webp" alt="Berry Blast" class="menu-image">
+                    <div class="menu-content">
+                        <h3>Creamy Corn</h3>
+                        <div class="menu-price">RM 1.00</div>
+                        <p>Fresh corn and creamy swirl with real fruit pieces throughout</p>
+                        <span class="order-badge">Order Now 🛒</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <h2 class="section-title fade-in">What Our Buyers Say</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;" class="fade-in">Real reviews from real customers who love KYROICE</p>
+            <div class="reviews-grid">
+                <div class="review-card fade-in">
+                    <img src="rew1.jpeg" alt="Customer Review - Nur" class="review-image">
+                    <div class="review-content">
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"Sedap, penghantaran pantas dan manis! The Rainbow Jelly is absolutely amazing. Will definitely order again!"</p>
+                        <div class="review-author">
+                            <div class="review-avatar">N</div>
+                            <div>
+                                <div class="review-name">Nur Aisyah</div>
+                                <div class="review-date">April 2026</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card fade-in">
+                    <img src="rew2.jpeg" alt="Customer Review - Aliff" class="review-image">
+                    <div class="review-content">
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"Aiskrim lembut, harga berpatutan dan sedap! The Moreo flavor is my favorite. Best ice cream in Kota Masai!"</p>
+                        <div class="review-author">
+                            <div class="review-avatar">A</div>
+                            <div>
+                                <div class="review-name">Aliff Imran</div>
+                                <div class="review-date">March 2026</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card fade-in">
+                    <img src="rew3.jpeg" alt="Customer Review - Haikal" class="review-image">
+                    <div class="review-content">
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">"Aiskrim sedap, sejuk dan berperisa! Love the Flavachoko. Perfect treat for hot Malaysian weather. Highly recommended!"</p>
+                        <div class="review-author">
+                            <div class="review-avatar">H</div>
+                            <div>
+                                <div class="review-name">Haikal</div>
+                                <div class="review-date">April 2026</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order CTA Section -->
+    <section class="order-cta" id="order">
+        <div class="container">
+            <h2 class="section-title fade-in">Sweet Moments Await</h2>
+            <p class="fade-in">Are you intrigued by our signature ice selections?</p>
+            <a href="https://forms.gle/J9QuXw8YpjhMXdHS6" target="_blank" class="btn btn-primary fade-in">Place Your Order Now 🍦</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>Opening Hours</h3>
+                <p>Mon - Fri: 7am - 10pm</p>
+                <p>Saturday: 8am - 10pm</p>
+                <p>Sunday: 8am - 11pm</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p><a href="mailto:hakimisan2005@gmail.com">hakimisan2005@gmail.com</a></p>
+                <p>WhatsApp: +60 11-1716 0549</p>
+            </div>
+            <div class="footer-section">
+                <h3>Location</h3>
+                <p>28, Jalan Pulasan 29,<br>
+                Taman Kota Masai,<br>
+                Pasir Gudang, Johor</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us On</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/kyroice/" target="_blank" title="Instagram">📷</a>
+                    <a href="https://www.tiktok.com/@kyrolce?_r=1&_t=ZS-95hL3T3w9ah" target="_blank" title="Tiktok">📘</a>
+                    <a href="https://wa.link/arx275" class="wa" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp">WA</i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 KYROICE. All rights reserved. Made with 🍦 in Malaysia</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
+            }
+        });
+    </script>
+</body>
+</html>'''
